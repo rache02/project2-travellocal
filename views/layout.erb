@@ -4,24 +4,30 @@
   <meta charset="UTF-8">
   <title>Travel Local</title>
   <link rel='stylesheet' href='/stylesheets/main.css'>
+  <link href="https://fonts.googleapis.com/css?family=Michroma" rel="stylesheet">
 </head>
 <body>
 
-  <h1>Travel Local</h1>
-  <a href="/"><button>Homepage<button></a>
-  <a href="/events/new"><button>New Event<button></a>
-  <a href="profile"><button>Profile<button></a>
+  <div class="login">
+    <% session[:user_id] %>
+    <% if logged_in? %>
+    logged in as <%= current_user.username %>
+    <form class="" action="/session" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <button>logout</button>
+    </form>
+    <%else%>
+    <a href="/login">login</a>
+    <% end %>
+  </div>
 
-  <% session[:user_id] %>
-  <% if logged_in? %>
-  logged in as <%= current_user.username %>
-  <form class="" action="/session" method="post">
-    <input type="hidden" name="_method" value="delete">
-    <button>logout</button></a>
-  </form>
-  <%else%>
-  <a href="/login"><button>login</button></a>
-  <% end %>
+  <div class="toolbar">
+    <h1>Travel Local</h1>
+    <a href="/">Homepage</a>
+    <a href="/profile">Profile</a>
+    <!-- <a href="/local_guide">Local Guides</a> -->
+    <a href="/events">City Events</a>
+  </div>
 
   <%= yield %>
 

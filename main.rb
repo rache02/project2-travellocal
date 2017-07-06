@@ -1,7 +1,7 @@
 
 require 'sinatra'
-# require 'sinatra/reloader'
-# require 'pry'
+require 'sinatra/reloader'
+require 'pry'
 require 'pg'
 
 require_relative 'db_config'
@@ -13,10 +13,14 @@ require_relative 'models/event_type'
 # require_relative 'models/event_participant'
 
 def run_sql(sql)
-  db = PG.connect(dbname: 'test_project2')
+  db = PG.connect(dbname: 'travel_local')
   result = db.exec(sql)
   db.close
   return result
+end
+
+def current_user
+  current user = User.find_by(id: session[:user_id])
 end
 
 helpers do
@@ -60,7 +64,7 @@ end
 
 get '/profile' do
   # sql = "SELECT * FROM users WHERE id = #{params[:id]}"
-  @user = User.find(1)
+  @user = User.find_by(email: params[:email])
   erb :profile
 end
 
@@ -74,7 +78,11 @@ post '/create_profile' do
   user.email = params[:email]
   user.username = params[:username]
   user.password = params[:password]
-  user.profile_image = params[:profile_image]
+  if params[:profile_image] == ' '
+    user.profile_image = params[:profile_image]
+  else
+    user.profile_image = "http://www.freeiconspng.com/uploads/profile-icon-9.png"
+  end
   user.age = params[:age]
   user.location = params[:location]
   if user.save
@@ -113,68 +121,90 @@ delete '/profile/:id' do
 end
 
 get '/' do
+  erb :index
+end
+
+get '/local_guide' do
+  # @users = run_sql("SELECT * FROM users;")
+  erb :local_guide
+end
+
+# search for local guide using location
+post '/location_search' do
+  sql = "SELECT * FROM users WHERE location = '#{params[:user_search]}'"
+  @users_search = run_sql(sql)
+  erb :location_search
+end
+
+post '/user_search' do
+  sql = "SELECT * FROM users WHERE username = '#{params[:user_search]}'"
+  @users_search = run_sql(sql)
+  erb :location_search
+end
+
+get '/events' do
   @events = Event.all
   erb :index
 end
 
-get '/events' do
-  erb :event_details
-end
+# get '/event_details' do
+#   erb :event_details
+# end
+#
+# get '/events/new' do
+#   @event_type = EventType.all
+#   erb :new_event
+# end
+#
+# post '/events' do
+#   event = Event.new
+#   event.name = params[:name]
+#   event.image_url = params[:image_url]
+#   event.event_type_id = params[:event_type_id]
+#   event.highlights = params[:highlights]
+#   event.description = params[:description]
+#   if event.save
+#     redirect "/events/#{ params[:event_id]}"
+#   else
+#     erb :new_event
+#   end
+# end
+#
+# get '/events/:id/edit' do
+#   @event = Event.find(params[:id])
+#   @event_types = EventType.all
+# end
+#
+# patch '/events/:id' do
+#   event = Event.find(params[:id])
+#   event.name = params[:name]
+#   event.image_url = params[:image_url]
+#   if event.save
+#     redirect "events/#{params[:event_id]}"
+#   else
+#     erb :index
+#   end
+# end
+#
+# delete '/events/:id' do
+#   event = Event.find(params[:id])
+#   event.destroy
+#   erb :index
+# end
+#
+# get '/events/:id' do
+#   @event = Event.find(params[:id])
+#   # @user =
+#   @event_type = EventType.all
+#   # @comment = Comment.where(event_id: params[:id])
+#   erb :event_details
+# end
 
-get '/events/new' do
-  @event_type = EventType.all
-  erb :new_event
-end
-
-post '/events' do
-  event = Event.new
-  event.name = params[:name]
-  event.image_url = params[:image_url]
-  event.event_type_id = params[:event_type_id]
-  event.highlights = params[:highlights]
-  event.description = params[:description]
-  if event.save
-    redirect "/events/#{ params[:event_id]}"
-  else
-    erb :new_event
-  end
-end
-
-get '/events/:id/edit' do
-  @event = Event.find(params[:id])
-  @event_types = EventType.all
-end
-
-patch '/events/:id' do
-  event = Event.find(params[:id])
-  event.name = params[:name]
-  event.image_url = params[:image_url]
-  if event.save
-    redirect "events/#{params[:event_id]}"
-  else
-    erb :index
-  end
-end
-
-delete '/events/:id' do
-  event = Event.find(params[:id])
-  event.destroy
-  erb :index
-end
-
-get '/events/:id' do
-  @event = Event.find(params[:id])
-  # @user =
-  @event_type = EventType.all
-  # @comment = Comment.where(event_id: params[:id])
-  erb :event_details
-end
-
-post '/comments' do
-  redirect '/login' if !logged_in?
-  comment = Comment.new
-  comment.event_id = params[:event_id]
-  comment.description = params[:description]
-  comment.save
-  redirect "/events/#{ params[:event_id]}"
-end
+# post '/comments' do
+#   redirect '/login' if !logged_in?
+#   comment = Comment.new
+#   comment.event_id = params[:event_id]
+#   comment.description = params[:description]
+#   comment.save
+#   redirect "/events/#{ params[:event_id]}"
+# end

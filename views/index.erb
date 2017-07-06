@@ -4,10 +4,28 @@
   <img src="" alt="">
 </div>
 
-<% @events.each do |event| %>
-  <img src="<%= event['image_url']%>" alt="">
-  <h4><a href="/events/<%= event['id'] %>"><%= event['name']%></a></h4>
+<form class="" action="" method="post">
+  <h6>Are you looking to show someone around?</h6>
+  <label for="">Dates of Availability</label>
+  <input type="text" name="" value="">
+
+  <button>Search</button>
+</form>
+
+<form class="" action="/location_search" method="post">
+  <h6>Are you looking for some local knowledge?</h6>
+  <label for="">Travel Destination</label>
+  <input type="text" name="user_search" value="">
+
+  <!-- <label for="">Dates</label>
+  <input type="text" name="" value=""> -->
+  <button>Search</button>
+</form>
+
+<%# @events.each do |event| %>
+  <!-- <img src="<%#= event['image_url']%>" alt="">
+  <h4><a href="/events/<%#= event['id'] %>"><%#= event['name']%></a></h4>
   <ul>
-    <li><%= event['highlights']%></li>
-  </ul>
-<% end %>
+    <li><%#= event['highlights']%></li>
+  </ul> -->
+<%# end %>

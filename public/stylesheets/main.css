@@ -1,0 +1,14 @@
+.toolbar {
+  color: #CD5360;
+  font-family: 'Michroma', sans-serif;
+  border: 50px;
+  text-transformation: uppercase;
+}
+
+.login {
+  color: #CD5360;
+  font-family: 'Michroma', sans-serif;
+  border: 100px;
+  text-transformation: uppercase;
+  float: right
+}

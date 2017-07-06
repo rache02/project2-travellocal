@@ -1,0 +1,6 @@
+<h4>One of these could be your local guide</h4>
+
+<% @users_search.each do |user| %>
+  <img src="<%user['profile_image']%>" alt="">
+  <h4><a href="#"><%= user['username']%></a></h4>
+<% end %>

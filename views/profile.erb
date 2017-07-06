@@ -2,6 +2,12 @@
 
 <a href="/user/<%= @user['id'] %>/edit%>"><button>Edit Profile</button></a>
 
+<form class="" action="/profile/<%= @user['id']%>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button>Delete Profile</button>
+</form>
+
+
 <h5>Username: <%= @user['username']%></h2>
 
 <img src="<%= @user['profile_image']%>" alt="">
