@@ -15,5 +15,3 @@ require_relative 'models/event'
 require_relative 'models/event_type'
 # require_relative 'models/comment'
 # require_relative 'models/event_participant'
-
-# binding.pry
