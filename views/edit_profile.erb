@@ -1,0 +1,25 @@
+<h2>Edit Profile</h2>
+
+<form class="" action="/profile/<%= @user['id']%>" method="post">
+  <input type="hidden" name="_method" value="patch">
+
+  <label for="">email</label>
+  <input type="text" name="email" value="<%= @user['email']%>">
+
+  <label for="">Username</label>
+  <input type="text" name="username" value="<%= @user['username']%>">
+
+  <label for="">Password</label>
+  <input type="text" name="password" value="">
+
+  <label for="">Profile Image</label>
+  <input type="text" name="profile_image" value="<%= @user['profile_image']%>">
+
+  <label for="">Age</label>
+  <input type="text" name="age" value="<%= @user['age']%>">
+
+  <label for="">Location</label>
+  <input type="text" name="location" value="<%= @user['location']%>">
+
+<button>Update</button>
+</form>

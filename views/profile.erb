@@ -1,0 +1,15 @@
+<h1>Profile</h1>
+
+<a href="/user/<%= @user['id'] %>/edit%>"><button>Edit Profile</button></a>
+
+<h5>Username: <%= @user['username']%></h2>
+
+<img src="<%= @user['profile_image']%>" alt="">
+
+<h5>Email: <%= @user['email']%></h5>
+
+<h5>Age: <%= @user['age']%></h5>
+
+<h5>Location: <%= @user['location']%></h5>
+
+<%# binding.pry %>

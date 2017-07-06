@@ -1,0 +1,26 @@
+<h2>Edit Event</h2>
+
+<form class="" action="/events/<%= @event['id'] %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+
+  <label for="">Event Name</label>
+  <input type="text" name="name" value="<%= @event['name']%>">
+
+  <label for="">Image</label>
+  <input type="text" name="image_url" value="<%= @event['image_url']%>">
+
+  <label for="">Event Type</label>
+  <select class="" name="event_type_id">
+    <% @event_type.each do |event_type|%>
+      <option value="<%= event_type.id%>"><%= event_type.name%></option>
+    <% end %>
+  </select>
+
+  <label for="">Highlights</label>
+  <input type="text" name="highlights" value="<%= @event['highlights']%>">
+
+  <label for="">Description</label>
+  <input type="text" name="description" value="<%= @event['description']%>">
+
+  <button>update</button>
+</form>

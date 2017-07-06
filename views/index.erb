@@ -1,0 +1,13 @@
+<div id="banner" class="imageRotate">
+  <img src="" alt="">
+  <img src="" alt="">
+  <img src="" alt="">
+</div>
+
+<% @events.each do |event| %>
+  <img src="<%= event['image_url']%>" alt="">
+  <h4><a href="/events/<%= event['id'] %>"><%= event['name']%></a></h4>
+  <ul>
+    <li><%= event['highlights']%></li>
+  </ul>
+<% end %>
