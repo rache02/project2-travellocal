@@ -14,4 +14,4 @@ require_relative 'models/review'
 require_relative 'models/event'
 require_relative 'models/event_type'
 
-binding.pry
+# binding.pry
