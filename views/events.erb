@@ -1,0 +1,12 @@
+<h2>Upcoming Events</h2>
+
+<a href="/create_event"><button>Create Event</button></a>
+
+<% @events.each do |event| %>
+  <h4><a href="/events/<%= event['id'] %>"><%= event['name'] %></h4>
+  <img src="<%= event['image_url'] %>" alt="">
+  <ul>
+    <li><%= event['highlights']%></li>
+    <li><%= event['location']%></li>
+  </ul>
+<% end%>

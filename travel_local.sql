@@ -7,6 +7,17 @@ CREATE TABLE users(
   location VARCHAR(400)
 )
 
+CREATE TABLE travellers(
+  id SERIAL4 PRIMARY KEY,
+  user_id INTEGER,
+  cities_id INTEGER
+)
+
+CREATE TABLE cities(
+  id SERIAL4 PRIMARY KEY,
+  location VARCHAR(400)
+)
+
 CREATE TABLE events(
   id SERIAL4 PRIMARY KEY,
   user_id INTEGER,

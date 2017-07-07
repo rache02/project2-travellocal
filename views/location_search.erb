@@ -1,6 +1,16 @@
-<h4>One of these could be your local guide</h4>
+<h4>Look at these profiles to find the right guide for you!</h4>
 
 <% @users_search.each do |user| %>
-  <img src="<%user['profile_image']%>" alt="">
+  <img src="<%= user['profile_image']%>" alt="">
   <h4><a href="/profile/<%= user['id']%>"><%= user['username']%></a></h4>
+  <h4><%= user['age']%></h4>
+  <h4><%#= user['bio'] %></h4>
+  <p><%#= review['user_id']%></p>
+<% end %>
+
+
+<% @event_search.each do |event| %>
+  <img src="<%= event['image_url']%>" alt="">
+  <h4><a href="/event/<%= event['id']%>"><%= event['name']%></a></h4>
+  <ul><li><%= event['highlights']%></li></ul>
 <% end %>

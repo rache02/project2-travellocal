@@ -1,5 +1,24 @@
+body {
+  font-family: font-family: 'ABeeZee', sans-serif;
+  background-color: #F9E8D5;
+  color: #2E3D35
+}
+
+p {
+  font-family: font-family: 'ABeeZee', sans-serif;
+
+}
+
+label {
+  font-family: font-family: 'ABeeZee', sans-serif;
+}
+
+img {
+  width: 400px;
+}
+
 .toolbar {
-  color: #CD5360;
+  color: #72323F;
   font-family: 'Michroma', sans-serif;
   border: 50px;
   text-transformation: uppercase;
